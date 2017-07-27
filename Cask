@@ -11,6 +11,7 @@
 (depends-on "dash")
 (depends-on "dired+")
 (depends-on "drag-stuff")
+(depends-on "elpy")
 (depends-on "exec-path-from-shell")
 (depends-on "expand-region")
 (depends-on "evil")
