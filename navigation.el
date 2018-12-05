@@ -54,16 +54,15 @@
 ;; Dired DWIM
 (setq dired-dwim-target t)
 
-(require 'dired+)
 (setq dired-auto-revert-buffer t)
 (setq dired-isearch-filenames 1)
-(setq diredp-hide-details-initially-flag nil)
 
 ;; Avy
 (avy-setup-default)
-(bind-key "C-:" 'avy-goto-char)
-(bind-key "C-'" 'avy-goto-char-2)
+(bind-key "C-;" 'avy-goto-char)
+(bind-key "C-:" 'avy-goto-char-2)
 (bind-key "M-g f" 'avy-goto-line)
+(bind-key "M-s" 'avy-goto-char-timer)
 
 ;; Winner mode
 (winner-mode 1)
@@ -118,17 +117,6 @@
 (bind-key "C-M-a" 'sp-backward-up-sexp)
 (bind-key "C-M-e" 'sp-up-sexp)
 
-;; Modify the colors used by the company-mode dropdown, since my theme has a
-;; dark background.
-(require 'color)
-(let ((bg (face-attribute 'default :background)))
-  (custom-set-faces
-   `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
-   `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
-   `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
-   `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
-   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
-
 ;; Visual regexp
 (require 'visual-regexp-steroids)
 (bind-key "C-c r" 'vr/replace)
@@ -142,3 +130,7 @@
 (bind-key "C->" 'mc/mark-next-like-this)
 (bind-key "C-<" 'mc/mark-previous-like-this)
 (bind-key "C-c C-<" 'mc/mark-all-like-this)
+
+;; Which-key
+(require 'which-key)
+(which-key-mode)

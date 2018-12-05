@@ -11,6 +11,9 @@
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
+;; Reset checklist
+(bind-key "C-c t" 'org-reset-checkbox-state-subtree)
+
 ;; All org files can contribute to the agenda.
 (setq org-agenda-files (list "~/org"))
 
@@ -95,7 +98,6 @@
 (add-hook 'org-clock-in-hook 'org-timer-start)
 (add-hook 'org-clock-out-hook 'org-timer-stop)
 
-
 ;; Hide done tasks in agenda view.
 (setq org-agenda-skip-scheduled-if-done t)
 
@@ -109,3 +111,37 @@
 (setq org-enforce-todo-dependencies t)
 (setq org-track-ordered-property-with-tag t)
 (setq org-agenda-dim-blocked-tasks 'invisible)
+
+;; Org super agenda mode.
+(require 'org-super-agenda)
+(require 'org-habit)
+
+(setq org-super-agenda-groups
+      '(;; Each group has an implicit boolean OR operator between its selectors.
+        (:name "Today"  ; Optionally specify section name
+               :time-grid t)  ; Items that appear on the time grid
+        (:name "Monitoring"
+               :tag "monitoring"
+               :order 7)
+        (:name "Blocked"
+               :todo "WAITING"
+               :order 8)
+        (:name "Personal"
+               :habit t
+               :tag "personal"
+               :order 9)
+        (:name "Reviews"
+               :tag "reviews")
+        (:name "Important"
+               ;; Single arguments given alone
+               :priority "A"
+               :tag "oncall")
+        (:name "Normal"
+               :priority<= "B"
+               ;; Show this section after "Today" and "Important", because
+               ;; their order is unspecified, defaulting to 0. Sections
+               ;; are displayed lowest-number-first.
+               :order 1)
+        ))
+
+(org-super-agenda-mode)

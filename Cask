@@ -20,7 +20,6 @@
 (depends-on "flycheck-cask")
 (depends-on "helm")
 (depends-on "helm-helm-commands")
-(depends-on "helm-projectile")
 (depends-on "helm-swoop")
 (depends-on "htmlize")
 (depends-on "idle-highlight-mode")

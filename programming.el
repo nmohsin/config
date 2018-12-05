@@ -40,16 +40,26 @@
 
 (defun nadeemm/init-shells ()
   (interactive)
-  (nadeemm/create-shell-with-name "g4-shell")
+  (nadeemm/create-shell-with-name "hg-shell")
   (nadeemm/create-shell-with-name "test-shell"))
 
 ;; Company mode for completion.
-(require 'company)
-(define-key company-active-map (kbd "C-n") 'company-select-next)
-(define-key company-active-map (kbd "C-p") 'company-select-previous)
-(global-company-mode)
-(bind-key "M-/" 'company-complete)
+;; (require 'company)
+;; (define-key company-active-map (kbd "C-n") 'company-select-next)
+;; (define-key company-active-map (kbd "C-p") 'company-select-previous)
+;; (global-company-mode)
+;; (bind-key "M-/" 'company-complete)
 
+;; Modify the colors used by the company-mode dropdown, since my theme has a
+;; dark background.
+(require 'color)
+(let ((bg (face-attribute 'default :background)))
+  (custom-set-faces
+   `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
+   `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
+   `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
+   `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
 
 (defun increment-number-at-point (&optional arg)
   "Increment the number forward from point by 'arg'."
@@ -70,7 +80,6 @@
 
 (bind-key "M-+" 'increment-number-at-point)
 
-
 ;; Copy current buffer's working directory to clipboard.
 (defun copy-pwd-to-clipboard ()
   "Copy the current buffer's working directory to clipboard."
@@ -78,3 +87,15 @@
   (kill-new default-directory))
 
 (bind-key "C-c C-d" 'copy-pwd-to-clipboard)
+
+;; Cycle between snake case, camel case, etc.
+(require 'string-inflection)
+(define-key global-map (kbd "C-c i") 'string-inflection-cycle)
+(define-key global-map (kbd "C-c C") 'string-inflection-camelcase)        ;; Force to CamelCase
+(define-key global-map (kbd "C-c L") 'string-inflection-lower-camelcase)  ;; Force to lowerCamelCase
+(define-key global-map (kbd "C-c U") 'string-inflection-underscore)        ;; Force to underscore
+(define-key global-map (kbd "C-c J") 'string-inflection-java-style-cycle) ;; Cycle through Java styles
+
+(require 'auto-yasnippet)
+(bind-key "s-w" 'aya-create)
+(bind-key "s-y" 'aya-expand)
