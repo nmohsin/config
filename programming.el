@@ -99,3 +99,6 @@
 (require 'auto-yasnippet)
 (bind-key "s-w" 'aya-create)
 (bind-key "s-y" 'aya-expand)
+
+;; Intero for Haskell.
+(add-hook 'haskell-mode-hook 'intero-mode)
