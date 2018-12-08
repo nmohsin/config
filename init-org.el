@@ -108,6 +108,8 @@
 
 ;; Org super agenda mode.
 (use-package org-super-agenda
+  :init
+  (add-to-list 'org-modules 'org-habit)
   :config
   (progn
     (setq org-super-agenda-groups
