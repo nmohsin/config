@@ -27,10 +27,6 @@
       (concat local-config-directory (convert-standard-filename "custom.el")))
 (load custom-file 'noerror)
 
-;; Set up use-package early, to improve load time.
-;; (eval-when-compile (require 'use-package))
-;; (require 'bind-key)
-
 (setq customizations
       (list
        "packages"

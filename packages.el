@@ -14,3 +14,14 @@
 (cask-initialize)
 (require 'pallet)
 (pallet-mode t)
+
+;; use-package
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+(setq use-package-verbose t)
+(setq use-package-always-ensure t)
+(require 'use-package)
+
+;; bind-key
+(unless (package-installed-p 'bind-key)
+  (package-install 'bind-key))

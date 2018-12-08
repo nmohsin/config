@@ -52,15 +52,24 @@
 (setq delete-old-versions t)
 
 ;; Smart Mode Line settings.
-(require 'smart-mode-line)
-(if after-init-time (sml/setup)
-  (add-hook 'after-init-hook 'sml/setup))
-(setq sml/shorten-directory t
-      sml/shorten-modes t
-      sml/name-width 25
-      sml/mode-width 'full)
+(use-package smart-mode-line
+  :config
+  (progn
+    (if after-init-time (sml/setup)
+      (add-hook 'after-init-hook 'sml/setup))
+    (setq sml/shorten-directory t
+	  sml/shorten-modes t
+	  sml/name-width 25
+	  sml/mode-width 'full)))
 
 (setq rm-blacklist '(" AC" " SP" " mate" " Plugged" " Gtags" " Abbrev" " Fill" " Guide"))
 
 ;; Set up themes
-(load-theme 'zenburn t)
+(use-package zenburn-theme
+ :config
+ (load-theme 'zenburn t))
+
+;; Dimmer mode.
+(use-package dimmer
+  :config
+  (dimmer-mode))

@@ -1,5 +1,4 @@
 (source gnu)
-(source marmalade)
 (source melpa)
 
 (depends-on "ace-jump-mode")
@@ -11,6 +10,8 @@
 (depends-on "commander")
 (depends-on "company")
 (depends-on "dash")
+(depends-on "diminish")
+(depends-on "dimmer")
 (depends-on "dired+")
 (depends-on "drag-stuff")
 (depends-on "ein")
@@ -57,6 +58,7 @@
 (depends-on "smex")
 (depends-on "string-inflection")
 (depends-on "swiper")
+(depends-on "undo-tree")
 (depends-on "use-package")
 (depends-on "visual-regexp-steroids")
 (depends-on "web-mode")

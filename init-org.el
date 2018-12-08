@@ -8,8 +8,9 @@
 (setq org-return-follows-link t)
 
 ;; Nice bullets.
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(use-package org-bullets
+  :init
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 ;; Reset checklist
 (bind-key "C-c t" 'org-reset-checkbox-state-subtree)
@@ -31,13 +32,6 @@
 ;; - Capture random note
 ;; - Start work on a new work task
 ;; - Continue work on an ongoing task.
-(setq org-capture-templates
-      '(
-        ("n" "Note"
-         item (file+headline "~/org/notes.org" "Capture")
-         " %U%? \n")))
-
-
 (setq org-capture-templates
       '(
         ("t" "Task"
@@ -113,35 +107,34 @@
 (setq org-agenda-dim-blocked-tasks 'invisible)
 
 ;; Org super agenda mode.
-(require 'org-super-agenda)
-(require 'org-habit)
-
-(setq org-super-agenda-groups
-      '(;; Each group has an implicit boolean OR operator between its selectors.
-        (:name "Today"  ; Optionally specify section name
-               :time-grid t)  ; Items that appear on the time grid
-        (:name "Monitoring"
-               :tag "monitoring"
-               :order 7)
-        (:name "Blocked"
-               :todo "WAITING"
-               :order 8)
-        (:name "Personal"
-               :habit t
-               :tag "personal"
-               :order 9)
-        (:name "Reviews"
-               :tag "reviews")
-        (:name "Important"
-               ;; Single arguments given alone
-               :priority "A"
-               :tag "oncall")
-        (:name "Normal"
-               :priority<= "B"
-               ;; Show this section after "Today" and "Important", because
-               ;; their order is unspecified, defaulting to 0. Sections
-               ;; are displayed lowest-number-first.
-               :order 1)
-        ))
-
-(org-super-agenda-mode)
+(use-package org-super-agenda
+  :config
+  (progn
+    (setq org-super-agenda-groups
+	  '(;; Each group has an implicit boolean OR operator between its selectors.
+            (:name "Today"  ; Optionally specify section name
+		   :time-grid t)  ; Items that appear on the time grid
+            (:name "Monitoring"
+		   :tag "monitoring"
+		   :order 7)
+            (:name "Blocked"
+		   :todo "WAITING"
+		   :order 8)
+            (:name "Personal"
+		   :habit t
+		   :tag "personal"
+		   :order 9)
+            (:name "Reviews"
+		   :tag "reviews")
+            (:name "Important"
+		   ;; Single arguments given alone
+		   :priority "A"
+		   :tag "oncall")
+            (:name "Normal"
+		   :priority<= "B"
+		   ;; Show this section after "Today" and "Important", because
+		   ;; their order is unspecified, defaulting to 0. Sections
+		   ;; are displayed lowest-number-first.
+		   :order 1)
+            ))
+    (org-super-agenda-mode)))
