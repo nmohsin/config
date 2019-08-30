@@ -1,5 +1,6 @@
 (source gnu)
 (source melpa)
+(source marmalade)
 
 (depends-on "ace-jump-mode")
 (depends-on "auto-yasnippet")
@@ -32,6 +33,7 @@
 (depends-on "helm")
 (depends-on "helm-helm-commands")
 (depends-on "helm-projectile")
+(depends-on "helm-ring")
 (depends-on "helm-swoop")
 (depends-on "highlight-indentation")
 (depends-on "htmlize")

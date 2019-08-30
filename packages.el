@@ -4,7 +4,7 @@
 ;; Add repositories.
 (eval-after-load 'package
   '(add-to-list 'package-archives
-                '("MELPA" . "http://melpa.milkbox.net/packages/")))
+                '("MELPA" . "http://melpa.org/packages/")))
 
 ;; Load package manager.
 (package-initialize)
@@ -25,3 +25,4 @@
 ;; bind-key
 (unless (package-installed-p 'bind-key)
   (package-install 'bind-key))
+(require 'bind-key)

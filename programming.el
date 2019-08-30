@@ -1,5 +1,4 @@
 ;; Customizations pertaining to writing code.
-
 (setq ansi-color-faces-vector
       [default bold shadow italic underline bold bold-italic bold])
 
@@ -36,19 +35,25 @@
     (progn
       (shell)
       (switch-to-buffer "*shell*")
-      (rename-buffer name))))
+      (rename-buffer name)
+      (comint-send-string (current-buffer) "swc\r"))))
 
 (defun nadeemm/init-shells ()
   (interactive)
   (nadeemm/create-shell-with-name "hg-shell")
   (nadeemm/create-shell-with-name "test-shell"))
 
+(defun nadeemm/server-shells ()
+  (interactive)
+  (nadeemm/create-shell-with-name "boq-shell")
+  (nadeemm/create-shell-with-name "fe-shell"))
+
 ;; Company mode for completion.
-;; (require 'company)
-;; (define-key company-active-map (kbd "C-n") 'company-select-next)
-;; (define-key company-active-map (kbd "C-p") 'company-select-previous)
-;; (global-company-mode)
-;; (bind-key "M-/" 'company-complete)
+(require 'company)
+(define-key company-active-map (kbd "C-n") 'company-select-next)
+(define-key company-active-map (kbd "C-p") 'company-select-previous)
+(global-company-mode)
+(bind-key "M-/" 'company-complete)
 
 ;; Modify the colors used by the company-mode dropdown, since my theme has a
 ;; dark background.
@@ -96,9 +101,11 @@
 (define-key global-map (kbd "C-c U") 'string-inflection-underscore)        ;; Force to underscore
 (define-key global-map (kbd "C-c J") 'string-inflection-java-style-cycle) ;; Cycle through Java styles
 
-(require 'auto-yasnippet)
-(bind-key "s-w" 'aya-create)
-(bind-key "s-y" 'aya-expand)
+;; (require 'auto-yasnippet)
+(use-package auto-yasnippet
+  :bind (
+	 ("s-w" . aya-create)
+	 ("s-y" . aya-expand)))
 
 ;; Intero for Haskell.
 (add-hook 'haskell-mode-hook 'intero-mode)

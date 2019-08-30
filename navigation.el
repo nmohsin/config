@@ -61,7 +61,7 @@
 (avy-setup-default)
 (bind-key "C-;" 'avy-goto-char)
 (bind-key "C-:" 'avy-goto-char-2)
-(bind-key "M-g f" 'avy-goto-line)
+(bind-key "M-g l" 'avy-goto-line)
 (bind-key "M-s" 'avy-goto-char-timer)
 
 ;; Winner mode
@@ -129,7 +129,7 @@
 (bind-key "C-c C-]" 'mc/edit-lines)
 (bind-key "C->" 'mc/mark-next-like-this)
 (bind-key "C-<" 'mc/mark-previous-like-this)
-(bind-key "C-c C-<" 'mc/mark-all-like-this)
+(bind-key "C-c C->" 'mc/mark-all-like-this)
 
 ;; Which-key
 (require 'which-key)

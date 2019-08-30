@@ -1,5 +1,6 @@
 ;; Org-mode setup
 (require 'org)
+(require 'bind-key)
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (bind-key "C-c a" 'org-agenda)
@@ -116,7 +117,10 @@
 	  '(;; Each group has an implicit boolean OR operator between its selectors.
             (:name "Today"  ; Optionally specify section name
 		   :time-grid t)  ; Items that appear on the time grid
-            (:name "Monitoring"
+	    (:name "Ongoing"
+		   :todo "ONGOING"
+		   :order 0)
+	    (:name "Monitoring"
 		   :tag "monitoring"
 		   :order 7)
             (:name "Blocked"
@@ -133,10 +137,16 @@
 		   :priority "A"
 		   :tag "oncall")
             (:name "Normal"
-		   :priority<= "B"
+		   :priority "B"
 		   ;; Show this section after "Today" and "Important", because
 		   ;; their order is unspecified, defaulting to 0. Sections
 		   ;; are displayed lowest-number-first.
 		   :order 1)
+	    (:name "Later"
+		   :priority "C"
+		   ;; Show this section after "Normal", because their
+		   ;; order is unspecified, defaulting to 0. Sections
+		   ;; are displayed lowest-number-first.
+		   :order 2)
             ))
     (org-super-agenda-mode)))

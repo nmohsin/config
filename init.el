@@ -34,7 +34,7 @@
        "init-org"
        "look-and-feel"
        "init-helm"
-       "init-ivy"
+       ;; "init-ivy"
        "navigation"
        "programming"
        ))
