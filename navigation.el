@@ -2,10 +2,11 @@
 
 ;; Fast window switching.
 (bind-key "M-o" 'other-window)
-(bind-key "M-p" 'ace-window)
-(bind-key "M-P" 'ace-window)
+(bind-key "M-O" 'ace-window)
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 (setq aw-dispatch-always t)
+
+(bind-key "<f5>" 'revert-buffer)
 
 ;; IBuffer instead of the default.
 (bind-key "C-x C-b" 'ibuffer)
